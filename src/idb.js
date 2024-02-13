@@ -58,6 +58,18 @@ class CostsDB {
         });
     }
 
+    async clearAllCosts() {
+        const db = await this.db;
+        const tx = db.transaction('costs', 'readwrite');
+        const store = tx.objectStore('costs');
+        return new Promise((resolve, reject) => {
+            const request = store.clear(); // Clears all data in the 'costs' object store
+            request.onsuccess = () => resolve('All costs cleared.');
+            request.onerror = (e) => reject('Error clearing costs: ', e.target.error);
+        });
+    }
+
+
 }
 
 export const idb = new CostsDB();

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { idb } from './idb';
+import './AddCostForm.css';
 
 export function AddCostForm() {
     const [cost, setCost] = useState({
@@ -22,7 +23,7 @@ export function AddCostForm() {
                 date, // Include date when adding a cost
             });
             if (result) {
-                alert('Cost added successfully');
+                // alert('Cost added successfully');
                 setCost({ sum: '', category: 'FOOD', description: '', date: '' }); // Reset form
             }
         } catch (error) {
@@ -36,56 +37,68 @@ export function AddCostForm() {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label>Sum</Form.Label>
-                <Form.Control
-                    type="number"
-                    name="sum"
-                    value={cost.sum}
-                    onChange={handleChange}
-                    required
-                />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Category</Form.Label>
-                <Form.Control
-                    as="select"
-                    name="category"
-                    value={cost.category}
-                    onChange={handleChange}
-                >
-                    <option>FOOD</option>
-                    <option>HEALTH</option>
-                    <option>EDUCATION</option>
-                    <option>TRAVEL</option>
-                    <option>HOUSING</option>
-                    <option>OTHER</option>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="description"
-                    value={cost.description}
-                    onChange={handleChange}
-                    required
-                />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Date</Form.Label>
-                <Form.Control
-                    type="date"
-                    name="date"
-                    value={cost.date}
-                    onChange={handleChange}
-                    required
-                />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Add Cost
-            </Button>
-        </Form>
+        <Card className="mb-5">
+            <Card.Header className="text-center">Add New Cost</Card.Header>
+            <Card.Body>
+                <Form onSubmit={handleSubmit} className="mb-5">
+                    <Row className="justify-content-md-center">
+                        <Col md={6}>
+                            <Form.Group>
+                                <Form.Label>Sum</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="sum"
+                                    value={cost.sum}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Category</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    name="category"
+                                    value={cost.category}
+                                    onChange={handleChange}
+                                >
+                                    <option>Food</option>
+                                    <option>Health</option>
+                                    <option>Education</option>
+                                    <option>Travel</option>
+                                    <option>Housing</option>
+                                    <option>Other</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="description"
+                                    value={cost.description}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Date</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="date"
+                                    value={cost.date}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <div className="text-center" id="submitButtomDiv">
+                                <Button variant="primary" type="submit">
+                                    Add Cost
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                </Form>
+            </Card.Body>
+        </Card>
+
     );
 }

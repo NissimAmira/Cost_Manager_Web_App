@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Table, Row, Col, Card } from 'react-bootstrap';
+import {Form, Table, Row, Col, Card, Button} from 'react-bootstrap';
 import { idb } from './idb';
 
 export function CostReport() {
@@ -44,11 +44,6 @@ export function CostReport() {
                             </Form.Group>
                         </Col>
                     </Row>
-                    {/*<Row className="justify-content-md-center">*/}
-                    {/*    <Col md={12} className="text-center">*/}
-                    {/*        <Button variant="primary" onClick={handleRefresh}>Refresh Report</Button>*/}
-                    {/*    </Col>*/}
-                    {/*</Row>*/}
                 </Form>
                 <Table striped bordered hover className="mt-4">
                     <thead>
@@ -72,6 +67,7 @@ export function CostReport() {
                     ))}
                     </tbody>
                 </Table>
+                //commented out button just for clearing DB while developing
                 {/*<Button variant="danger" onClick={() => idb.clearAllCosts().then(message => console.log(message)).catch(err => console.error(err))}>*/}
                 {/*    Clear All Costs*/}
                 {/*</Button>*/}

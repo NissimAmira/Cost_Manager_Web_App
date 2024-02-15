@@ -3,8 +3,8 @@ import { Form, Table, Row, Col, Card } from 'react-bootstrap';
 import { idb } from './idb';
 
 export function CostReport() {
-    const [month, setMonth] = useState(new Date().getMonth() + 1); // Default to current month
-    const [year, setYear] = useState(new Date().getFullYear()); // Default to current year
+    const [month, setMonth] = useState(new Date().getMonth() + 1);
+    const [year, setYear] = useState(new Date().getFullYear());
     const [costs, setCosts] = useState([]);
 
     const fetchCosts = async () => {

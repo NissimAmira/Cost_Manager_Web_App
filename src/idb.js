@@ -4,6 +4,10 @@ class CostsDB {
     }
 
     async openCostsDB(name, version) {
+        if (this.db) {
+            return this; // If already initialized, return the DB instance
+        }
+
         this.db = await new Promise((resolve, reject) => {
             const request = indexedDB.open(name, version);
 
@@ -15,22 +19,23 @@ class CostsDB {
             };
 
             request.onsuccess = (event) => resolve(event.target.result);
-            request.onerror = (event) => reject('IndexedDB error: ' + event.target.error.message);
+            request.onerror = (event) => reject('IndexedDB error: ' + event.target.errorCode);
         });
         return this;
     }
 
     async addCost(cost) {
+        if (!this.db) {
+            throw new Error("Database not initialized");
+        }
         const tx = this.db.transaction('costs', 'readwrite');
         const store = tx.objectStore('costs');
         return new Promise((resolve, reject) => {
             const request = store.add(cost);
-            request.onsuccess = () => resolve(true);
-            request.onerror = () => reject(false);
+            request.onsuccess = () => resolve(true); // Return true for success
+            request.onerror = () => reject(false); // Return false or throw an error on failure
         });
     }
-
-    // Add this method to the CostsDB class in src/idb.js
 
     async getCostsByMonthYear(month, year) {
         const db = await this.db;
@@ -43,13 +48,13 @@ class CostsDB {
                 const cursor = event.target.result;
                 if (cursor) {
                     const cost = cursor.value;
-                    const costDate = new Date(cost.date); // Assuming 'date' is a stored property
+                    const costDate = new Date(cost.date);
                     if (costDate.getMonth() + 1 === month && costDate.getFullYear() === year) {
                         costs.push(cost);
                     }
                     cursor.continue();
                 } else {
-                    resolve(costs); // Resolve the promise with the fetched costs
+                    resolve(costs);
                 }
             };
             store.openCursor().onerror = function(event) {
@@ -69,7 +74,7 @@ class CostsDB {
         });
     }
 
-
 }
 
 export const idb = new CostsDB();
+window.idb = idb;

@@ -8,19 +8,19 @@ export function AddCostForm() {
         sum: '',
         category: 'FOOD',
         description: '',
-        date: '', // Add date to the initial state
+        date: '',
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { sum, category, description, date } = cost;
         try {
-            await idb.openCostsDB('costsdb', 1);
+            await idb.openCostsDB('costsDB', 1);
             const result = await idb.addCost({
-                sum: parseFloat(sum), // Ensure sum is stored as a number
+                sum: parseFloat(sum),
                 category,
                 description,
-                date, // Include date when adding a cost
+                date,
             });
             if (result) {
                 // alert('Cost added successfully');

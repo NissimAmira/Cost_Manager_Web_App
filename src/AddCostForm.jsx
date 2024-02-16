@@ -61,12 +61,12 @@ export function AddCostForm() {
                                     value={cost.category}
                                     onChange={handleChange}
                                 >
-                                    <option>Food</option>
-                                    <option>Health</option>
-                                    <option>Education</option>
-                                    <option>Travel</option>
-                                    <option>Housing</option>
-                                    <option>Other</option>
+                                    <option>FOOD</option>
+                                    <option>HEALTH</option>
+                                    <option>EDUCATION</option>
+                                    <option>TRAVEL</option>
+                                    <option>HOUSING</option>
+                                    <option>OTHER</option>
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group>

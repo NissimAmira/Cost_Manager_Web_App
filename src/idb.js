@@ -28,14 +28,23 @@ class CostsDB {
         if (!this.db) {
             throw new Error("Database not initialized");
         }
+
+        const processedCost = {
+            sum: cost.sum || 0, // Default to 0 if sum is not provided
+            category: cost.category || 'OTHER', // Default to 'OTHER' if category is not provided
+            description: cost.description || 'No description', // Default to 'No description' if not provided
+            date: cost.date || new Date().toISOString().split('T')[0], // Default to current date if not provided
+        };
+
         const tx = this.db.transaction('costs', 'readwrite');
         const store = tx.objectStore('costs');
         return new Promise((resolve, reject) => {
-            const request = store.add(cost);
+            const request = store.add(processedCost);
             request.onsuccess = () => resolve(true); // Return true for success
             request.onerror = () => reject(false); // Return false or throw an error on failure
         });
     }
+
 
     async getCostsByMonthYear(month, year) {
         const db = await this.db;

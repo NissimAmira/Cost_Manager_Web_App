@@ -67,7 +67,7 @@ export function CostReport() {
                     ))}
                     </tbody>
                 </Table>
-                //commented out button just for clearing DB while developing
+                {/*commented out button just for clearing DB while developing*/}
                 {/*<Button variant="danger" onClick={() => idb.clearAllCosts().then(message => console.log(message)).catch(err => console.error(err))}>*/}
                 {/*    Clear All Costs*/}
                 {/*</Button>*/}

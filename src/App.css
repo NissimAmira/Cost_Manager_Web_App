@@ -1,3 +1,6 @@
+/*Nissim Amira 307831388*/
+/*Yarin Ben-Moshe 314939885*/
+
 .App {
   text-align: center;
 }
@@ -5,6 +8,11 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.table td, .table th {
+  text-align: center;
+  vertical-align: middle;
 }
 
 @media (prefers-reduced-motion: no-preference) {

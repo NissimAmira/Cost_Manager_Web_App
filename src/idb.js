@@ -1,5 +1,8 @@
+//Nissim Amira 307831388
+//Yarin Ben-Moshe 314939885
+
 class CostsDB {
-    constructor() {
+    Constractor() {
         this.db = null;
     }
 
@@ -36,8 +39,8 @@ class CostsDB {
             date: cost.date || new Date().toISOString().split('T')[0], // Default to current date if not provided
         };
 
-        const tx = this.db.transaction('costs', 'readwrite');
-        const store = tx.objectStore('costs');
+        const transaction = this.db.transaction('costs', 'readwrite');
+        const store = transaction.objectStore('costs');
         return new Promise((resolve, reject) => {
             const request = store.add(processedCost);
             request.onsuccess = () => resolve(true); // Return true for success
@@ -47,9 +50,14 @@ class CostsDB {
 
 
     async getCostsByMonthYear(month, year) {
+
+        if (!this.db) {
+            throw new Error("Database not initialized");
+        }
+
         const db = await this.db;
-        const tx = db.transaction('costs', 'readonly');
-        const store = tx.objectStore('costs');
+        const transaction = db.transaction('costs', 'readonly'); //create readonly transaction instance with the db
+        const store = transaction.objectStore('costs');
         const costs = [];
 
         return new Promise((resolve, reject) => {
@@ -72,17 +80,20 @@ class CostsDB {
         });
     }
 
-    async clearAllCosts() {
-        const db = await this.db;
-        const tx = db.transaction('costs', 'readwrite');
-        const store = tx.objectStore('costs');
-        return new Promise((resolve, reject) => {
-            const request = store.clear(); // Clears all data in the 'costs' object store
-            request.onsuccess = () => resolve('All costs cleared.');
-            request.onerror = (e) => reject('Error clearing costs: ', e.target.error);
-        });
-    }
+    async deleteCostById(id) {
+        if (!this.db) {
+            throw new Error("Database not initialized");
+        }
 
+        const db = await this.db;
+        const transaction = db.transaction('costs', 'readwrite');
+        const store = transaction.objectStore('costs');
+        return new Promise((resolve, reject) => {
+            const request = store.delete(id);
+            request.onsuccess = () => resolve(true);
+            request.onerror = (e) => reject('Error deleting cost', e.target.error);
+        })
+    }
 }
 
 export const idb = new CostsDB();

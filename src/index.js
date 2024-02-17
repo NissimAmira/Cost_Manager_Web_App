@@ -1,3 +1,6 @@
+//Nissim Amira 307831388
+//Yarin Ben-Moshe 314939885
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

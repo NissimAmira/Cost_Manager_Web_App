@@ -1,7 +1,11 @@
+//Nissim Amira 307831388
+//Yarin Ben-Moshe 314939885
+
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { AddCostForm } from './AddCostForm';
 import { CostReport } from './CostReport';
+import './App.css';
 
 function App() {
     return (

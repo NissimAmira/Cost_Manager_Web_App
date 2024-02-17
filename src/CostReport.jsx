@@ -1,3 +1,6 @@
+//Nissim Amira 307831388
+//Yarin Ben-Moshe 314939885
+
 import React, { useState, useEffect } from 'react';
 import {Form, Table, Row, Col, Card, Button} from 'react-bootstrap';
 import { idb } from './idb';
@@ -16,6 +19,11 @@ export function CostReport() {
     useEffect(() => {
         fetchCosts().catch(console.error);
     })
+
+    const handleDelete = async (id) => {
+        await idb.deleteCostById(id);
+        await fetchCosts(); // Refresh the list after deletion
+    };
 
     return (
         <Card>
@@ -53,6 +61,7 @@ export function CostReport() {
                         <th>Sum</th>
                         <th>Category</th>
                         <th>Description</th>
+                        <th>Delete?</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,14 +72,13 @@ export function CostReport() {
                             <td>{cost.sum}</td>
                             <td>{cost.category}</td>
                             <td>{cost.description}</td>
+                            <td>
+                                <Button variant="danger" onClick={() => handleDelete(cost.id)}>Delete</Button>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </Table>
-                {/*commented out button just for clearing DB while developing*/}
-                {/*<Button variant="danger" onClick={() => idb.clearAllCosts().then(message => console.log(message)).catch(err => console.error(err))}>*/}
-                {/*    Clear All Costs*/}
-                {/*</Button>*/}
             </Card.Body>
         </Card>
 

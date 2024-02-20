@@ -1,6 +1,8 @@
 //Nissim Amira 307831388
 //Yarin Ben-Moshe 314939885
 
+export const idb = new CostsDB();
+
 class CostsDB {
     Constractor() {
         this.db = null;
@@ -95,6 +97,4 @@ class CostsDB {
         })
     }
 }
-
-export const idb = new CostsDB();
 window.idb = idb;

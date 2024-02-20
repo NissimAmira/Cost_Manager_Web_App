@@ -25,7 +25,7 @@ export function AddCostForm() {
                 date,
             });
             if (result) {
-                // alert('Cost added successfully');
+                alert('Cost added successfully');
                 setCost({ sum: '', category: 'Food', description: '', date: '' }); // Reset form
             }
         } catch (error) {

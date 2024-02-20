@@ -45,7 +45,7 @@ export function CostReport() {
                             <Form.Group controlId="yearSelect">
                                 <Form.Label>Select Year</Form.Label>
                                 <Form.Control as="select" value={year} onChange={e => setYear(parseInt(e.target.value, 10))}>
-                                    {Array.from({ length: 10 }, (_, i) => (
+                                    {Array.from({ length: 100 }, (_, i) => (
                                         <option key={i} value={new Date().getFullYear() - i}>{new Date().getFullYear() - i}</option>
                                     ))}
                                 </Form.Control>

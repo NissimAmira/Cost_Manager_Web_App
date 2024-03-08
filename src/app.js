@@ -3,9 +3,9 @@
 
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { AddCostForm } from './AddCostForm';
-import { CostReport } from './CostReport';
-import './App.css';
+import { AddCostForm } from './add_cost_form';
+import { CostReport } from './cost_report';
+import './app.css';
 
 function App() {
     return (

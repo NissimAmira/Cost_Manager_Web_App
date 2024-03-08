@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { idb } from './idb';
-import './AddCostForm.css';
+import './add_cost_form.css';
 
 export function AddCostForm() {
     const [cost, setCost] = useState({

@@ -2,7 +2,7 @@
 //Yarin Ben-Moshe 314939885
 
 export default class CostsDB {
-    Constractor() {
+    Constructor() {
         this.db = null;
     }
 
